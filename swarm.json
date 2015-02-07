@@ -1,0 +1,26 @@
+{
+  "app_name": "monitor",
+  "services": [
+    {
+      "service_name": "prometheus",
+      "components": [
+        {
+          "component_name": "pyrphoros",
+          "image": "registry.giantswarm.io/seiffert/pyrphoros",
+          "ports": ["9090/tcp"],
+          "domains": {
+            "pyrphoros.gigantic.io": "9090"
+          }
+        },
+        {
+          "component_name": "desmotes",
+          "image": "registry.giantswarm.io/seiffert/desmotes",
+          "ports": ["9090/tcp"],
+          "domains": {
+            "desmotes.gigantic.io": "9090"
+          }
+        }
+      ]
+    }
+  ]
+}
