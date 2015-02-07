@@ -1,6 +1,6 @@
 # Gigantic Prometheus
 
-Running two prometheus instances that monitor each other on [Giant Swarm](https://giantswarm.io/).
+Running two [prometheus](http://prometheus.io/) instances that monitor each other on [Giant Swarm](https://giantswarm.io/).
 
 Access [Desmotes](http://en.wikipedia.org/wiki/Prometheus) and [Pyrphoros](http://en.wikipedia.org/wiki/Prometheus) via HTTP:
 
