@@ -4,8 +4,8 @@ Running two [prometheus](http://prometheus.io/) instances that monitor each othe
 Additionally, there is an Alertmanager instance used by both prometheus processes to publish alarms. The alertmanager 
 is available at [http://siren.gigantic.io](http://siren.gigantic.io).
 
-If you need to push metrics to prometheus, you can use the Pushgateway (kratos)[http://en.wikipedia.org/wiki/Kratos] 
-hosted at [http://kratos.gigantic.io](http://kratos.gigantic.io].
+If you need to push metrics to prometheus, you can use the Pushgateway [kratos](http://en.wikipedia.org/wiki/Kratos) 
+hosted at [http://kratos.gigantic.io](http://kratos.gigantic.io).
 
 Fancy dashboards can be created using Promdash / [apollo](http://apollo.gigantic.io).
 
