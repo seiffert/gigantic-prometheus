@@ -39,6 +39,19 @@
           }
         }
       ]
+    },
+    {
+      "service_name": "kratos",
+      "components": [
+        {
+          "component_name": "kratos",
+          "image": "registry.giantswarm.io/seiffert/kratos",
+          "ports": ["9090/tcp"],
+          "domains": {
+            "kratos.gigantic.io": "9090"
+          }
+        }
+      ]
     }
   ]
 }
