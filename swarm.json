@@ -52,6 +52,45 @@
           }
         }
       ]
+    },
+    {
+      "service_name": "apollo",
+      "components": [
+        {
+          "component_name": "apollo",
+          "image": "registry.giantswarm.io/seiffert/apollo",
+          "ports": ["3000/tcp"],
+          "domains": {
+            "apollo.gigantic.io": "3000"
+          },
+          "env": [
+            "MYSQL_DATABASE=apollo_db",
+            "MYSQL_USER=apollo_user",
+            "MYSQL_PASSWORD=apollo_pwd"
+          ],
+          "dependencies": [{
+            "name": "db",
+            "port": 3306
+          }]
+        },
+        {
+          "component_name": "db",
+          "image": "mysql",
+          "ports": ["3306/tcp"],
+          "env": [
+            "MYSQL_DATABASE=apollo_db",
+            "MYSQL_USER=apollo_user",
+            "MYSQL_PASSWORD=apollo_pwd",
+            "MYSQL_ROOT_PASSWORD=akjsdhflaiusdytf8913"
+          ],
+          "volumes": [
+            {
+              "path": "/var/lib/mysql",
+              "size": "2 GB"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -6,6 +6,7 @@ BUILDDIR=$(PWD)/.build
 PROMETHEUS_SRC=$(BUILDDIR)/prometheus
 ALERTMANAGER_SRC=$(BUILDDIR)/alertmanager
 PUSHGATEWAY_SRC=$(BUILDDIR)/pushgateway
+PROMDASH_SRC=$(BUILDDIR)/promdash
 
 all: clean .build build
 
@@ -30,6 +31,11 @@ build-pushgateway: build-builder
 	git clone git@github.com:prometheus/pushgateway.git $(PUSHGATEWAY_SRC)
 	docker run --rm -it -v $(PUSHGATEWAY_SRC):/opt/workspace pseiffert/prometheus-builder
 
+build-promdash:
+	git clone git@github.com:prometheus/promdash.git $(PROMDASH_SRC)
+	cp apollo/* $(PROMDASH_SRC)
+	cd $(PROMDASH_SRC) && $(MAKE) build
+
 copy-pyrphoros:
 	cp $(PROMETHEUS_SRC)/prometheus pyrphoros/
 
@@ -42,11 +48,12 @@ copy-kratos:
 copy-siren:
 	cp $(ALERTMANAGER_SRC)/alertmanager siren/
 
-build-images:
+build-images: build-apollo
 	cd desmotes && make clean && make build && make push
 	cd pyrphoros && make clean && make build && make push
 	cd siren && make clean && make build && make push
 	cd kratos && make clean && make build && make push
+	cd apollo && make push
 
 build: build-prometheus build-alertmanager build-pushgateway copy-pyrphoros copy-desmotes copy-siren copy-kratos build-images
 
