@@ -10,7 +10,13 @@
           "ports": ["9090/tcp"],
           "domains": {
             "pyrphoros.gigantic.io": "9090"
-          }
+          },
+          "volumes": [
+            {
+              "path": "/metrics",
+              "size": "2 GB"
+            }
+          ]
         }
       ]
     },
@@ -23,7 +29,13 @@
           "ports": ["9090/tcp"],
           "domains": {
             "desmotes.gigantic.io": "9090"
-          }
+          },
+          "volumes": [
+            {
+              "path": "/metrics",
+              "size": "2 GB"
+            }
+          ]
         }
       ]
     },

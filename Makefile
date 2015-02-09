@@ -48,7 +48,7 @@ copy-kratos:
 copy-siren:
 	cp $(ALERTMANAGER_SRC)/alertmanager siren/
 
-build-images: build-apollo
+build-images: build-promdash
 	cd desmotes && make clean && make build && make push
 	cd pyrphoros && make clean && make build && make push
 	cd siren && make clean && make build && make push

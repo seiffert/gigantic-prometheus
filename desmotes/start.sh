@@ -2,5 +2,6 @@
 
 exec /prometheus \
         -config.file=/desmotes.conf \
-        -logtostderr \
-        -alertmanager.url=http://siren.gigantic.io
+        -logtostderr=true \
+        -alertmanager.url=http://siren.gigantic.io \
+        -storage.local.path=/metrics
