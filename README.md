@@ -7,7 +7,7 @@ is available at [http://siren.gigantic.io](http://siren.gigantic.io).
 If you need to push metrics to prometheus, you can use the Pushgateway [kratos](http://en.wikipedia.org/wiki/Kratos) 
 hosted at [http://kratos.gigantic.io](http://kratos.gigantic.io).
 
-Fancy dashboards can be created using Promdash / [apollo](http://apollo.gigantic.io).
+Fancy dashboards can be created using Promdash / [apollo](http://apollo.gigantic.io/test).
 
 Access [Desmotes](http://en.wikipedia.org/wiki/Prometheus) and [Pyrphoros](http://en.wikipedia.org/wiki/Prometheus) via HTTP:
 
