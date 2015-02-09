@@ -58,5 +58,5 @@ build-images: build-promdash
 build: build-prometheus build-alertmanager build-pushgateway copy-pyrphoros copy-desmotes copy-siren copy-kratos build-images
 
 run: 
-	swarm delete -y monitor
-	swarm up
+	swarm stop monitor
+	swarm start monitor
