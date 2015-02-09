@@ -3,21 +3,44 @@ PROJECT=monitor-a
 .PHONY=all get-deps build push
 
 BUILDDIR=$(PWD)/.build
-SRCDIR=$(BUILDDIR)/prometheus
+PROMETHEUS_SRC=$(BUILDDIR)/prometheus
+ALERTMANAGER_SRC=$(BUILDDIR)/alertmanager
 
 all: clean .build build
 
 .build:
-		mkdir -p $(BUILDDIR)/bin
+	mkdir -p $(BUILDDIR)/bin
 
 clean:
-		rm -rf $(BUILDDIR)
+	rm -rf $(BUILDDIR)
 
 build-builder:
-		cd builder && docker build -t pseiffert/prometheus-builder .
+	cd builder && docker build -t pseiffert/prometheus-builder .
 
-build: build-builder 
-		git clone git@github.com:prometheus/prometheus.git $(SRCDIR)
-		docker run --rm -it -v $(SRCDIR):/opt/workspace pseiffert/prometheus-builder 
-		cp $(SRCDIR)/prometheus pyrphoros/
-		cp $(SRCDIR)/prometheus desmotes/
+build-prometheus: build-builder
+	git clone git@github.com:prometheus/prometheus.git $(PROMETHEUS_SRC)
+	docker run --rm -it -v $(PROMETHEUS_SRC):/opt/workspace pseiffert/prometheus-builder 
+
+build-alertmanager: build-builder
+	git clone git@github.com:prometheus/alertmanager.git $(ALERTMANAGER_SRC)
+	docker run --rm -it -v $(ALERTMANAGER_SRC):/opt/workspace pseiffert/prometheus-builder alertmanager
+
+copy-pyrphoros:
+	cp $(PROMETHEUS_SRC)/prometheus pyrphoros/
+
+copy-desmotes:
+	cp $(PROMETHEUS_SRC)/prometheus desmotes/
+
+copy-siren:
+	cp $(ALERTMANAGER_SRC)/alertmanager siren/
+
+build-images:
+	cd desmotes && make clean && make build && make push
+	cd pyrphoros && make clean && make build && make push
+	cd siren && make clean && make build && make push
+
+build: build-prometheus build-alertmanager copy-pyrphoros copy-desmotes copy-siren build-images
+
+run: 
+	swarm delete -y monitor
+	swarm up

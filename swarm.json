@@ -2,7 +2,7 @@
   "app_name": "monitor",
   "services": [
     {
-      "service_name": "prometheus",
+      "service_name": "pyrphoros",
       "components": [
         {
           "component_name": "pyrphoros",
@@ -11,13 +11,31 @@
           "domains": {
             "pyrphoros.gigantic.io": "9090"
           }
-        },
+        }
+      ]
+    },
+    {
+      "service_name": "desmotes",
+      "components": [
         {
           "component_name": "desmotes",
           "image": "registry.giantswarm.io/seiffert/desmotes",
           "ports": ["9090/tcp"],
           "domains": {
             "desmotes.gigantic.io": "9090"
+          }
+        }
+      ]
+    },
+    {
+      "service_name": "siren",
+      "components": [
+        {
+          "component_name": "siren",
+          "image": "registry.giantswarm.io/seiffert/siren",
+          "ports": ["9090/tcp"],
+          "domains": {
+            "siren.gigantic.io": "9090"
           }
         }
       ]
